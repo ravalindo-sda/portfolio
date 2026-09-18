@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Rava | Full-Stack & UI/UX Portfolio</title>
+  <meta name="description" content="Explore Rava's portfolio of full-stack web development projects, UI/UX case studies, and modern digital experiences.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #08090e;
+      --bg-surface: #0e1017;
+      --bg-card: rgba(16, 18, 26, 0.65);
+      --bg-card-hover: rgba(24, 27, 38, 0.8);
+      --accent-red: #ff3322;
+      --accent-red-glow: rgba(255, 51, 34, 0.45);
+      --accent-red-subtle: rgba(255, 51, 34, 0.12);
+      --accent-cyan: #00e5ff;
+      --accent-emerald: #10b981;
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border-hover: rgba(255, 51, 34, 0.5);
+      --text-main: #ffffff;
+      --text-muted: #9fa3b8;
+      --text-dim: #676c82;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', var(--font-body);
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      width: 100%;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      background-image:
+        radial-gradient(circle at 82% 10%, rgba(255, 51, 34, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 12% 35%, rgba(45, 95, 225, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 88% 65%, rgba(139, 92, 246, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 25% 90%, rgba(255, 51, 34, 0.06) 0%, transparent 45%),
+        linear-gradient(rgba(255,255,255,0.014) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 52px 52px, 52px 52px;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #08090e; }
+    ::-webkit-scrollbar-thumb { background: #252836; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-red); }
+
+    /* Ambient Background Glow */
+    .bg-mesh-glow { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; }
+    .glow-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.35; animation: pulseGlow 14s ease-in-out infinite alternate; }
+    .glow-blob-1 { top: -10%; right: 15%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,51,34,0.2) 0%, transparent 70%); }
+    .glow-blob-2 { top: 40%; left: -5%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); animation-delay: -5s; }
+    .glow-blob-3 { bottom: 5%; right: 5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,51,34,0.12) 0%, transparent 70%); animation-delay: -9s; }
+    @keyframes pulseGlow { 0% { transform: scale(0.9); opacity: 0.25; } 50% { transform: scale(1.1) translate(20px,-20px); opacity: 0.5; } 100% { transform: scale(0.95) translate(-15px,15px); opacity: 0.3; } }
+
+    .content-wrapper { position: relative; z-index: 1; width: 100%; }
+    .container { width: 100%; max-width: 1380px; margin: 0 auto; padding: 0 32px; }
+
+    /* NAV */
+    header { position: fixed; top: 24px; left: 0; width: 100%; z-index: 100; pointer-events: none; }
+    .nav-container { max-width: 1380px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; color: #fff; text-decoration: none; pointer-events: auto; }
+    .logo-icon { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at center, #ff5544 30%, #ff1100 100%); display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 0 12px var(--accent-red-glow); }
+    .logo-icon::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+    .nav-pill { background: rgba(14,16,24,0.85); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 5px 8px; border-radius: 40px; display: flex; align-items: center; gap: 6px; pointer-events: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.45); }
+    .nav-link { color: #a4a8bd; text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 8px 18px; border-radius: 30px; transition: all 0.25s ease; }
+    .nav-link:hover { color: #fff; }
+    .nav-link.active { background: linear-gradient(135deg, #ff3322 0%, #e62010 100%); color: #fff; font-weight: 600; box-shadow: 0 2px 14px var(--accent-red-glow); }
+    .nav-right { display: flex; align-items: center; gap: 20px; pointer-events: auto; }
+    .tag-stack { display: flex; flex-direction: column; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--text-dim); text-align: right; font-weight: 600; line-height: 1.25; }
+    .tag-stack .tag-accent { color: var(--text-muted); }
+    .btn-sprint { background: rgba(16,18,26,0.85); border: 1px solid rgba(255,51,34,0.55); backdrop-filter: blur(16px); color: #fff; padding: 8px 20px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.25s ease; }
+    .btn-sprint:hover { background: var(--accent-red); border-color: var(--accent-red); box-shadow: 0 0 16px var(--accent-red-glow); transform: translateY(-1px); }
+
+    /* BADGES */
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 30px; background: rgba(22,25,36,0.7); border: 1px solid var(--glass-border); backdrop-filter: blur(12px); font-size: 0.82rem; font-weight: 600; color: #d1d5ea; margin-bottom: 24px; letter-spacing: 0.03em; text-transform: uppercase; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-red); box-shadow: 0 0 10px var(--accent-red); animation: blinkDot 2s ease-in-out infinite; }
+    @keyframes blinkDot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 26px; border-radius: 40px; font-size: 0.92rem; font-weight: 600; text-decoration: none; transition: all 0.25s ease; cursor: pointer; border: none; }
+    .btn-primary { background: linear-gradient(135deg, #ff3322 0%, #d81c0e 100%); color: #fff; box-shadow: 0 4px 20px rgba(255,51,34,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,51,34,0.65); }
+    .btn-outline { background: rgba(18,20,30,0.65); color: #fff; border: 1px solid var(--glass-border); backdrop-filter: blur(12px); }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.3); background: rgba(28,32,46,0.8); transform: translateY(-2px); }
+    .highlight-red { color: var(--accent-red); }
+
+    .glass-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 24px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: all 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .glass-card:hover { background: var(--bg-card-hover); border-color: var(--glass-border-hover); box-shadow: 0 16px 40px rgba(0,0,0,0.45), 0 0 25px var(--accent-red-subtle); }
+
+    /* HERO */
+    .projects-hero { padding: 180px 0 80px; }
+    .hero-container { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 50px; align-items: flex-end; margin-bottom: 50px; }
+    .hero-title-area { max-width: 820px; }
+    .hero-main-title { font-family: var(--font-display); font-size: clamp(3rem,6vw,5.2rem); line-height: 1.04; font-weight: 800; letter-spacing: -0.04em; color: #fff; margin-bottom: 24px; }
+    .hero-main-title .gradient-text { background: linear-gradient(180deg, #fff 30%, #b8bad2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-main-title em { font-style: italic; font-weight: 400; }
+    .hero-subtext { font-size: 1.12rem; line-height: 1.7; color: var(--text-muted); max-width: 640px; margin-bottom: 30px; }
+
+    .hero-meta-summary { display: flex; flex-direction: column; gap: 16px; padding: 30px; border-radius: 20px; background: rgba(14,16,24,0.55); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(16px); }
+    .meta-metric-row { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .meta-metric-row:last-child { padding-bottom: 0; border-bottom: none; }
+    .meta-metric-label { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+    .meta-metric-val { font-family: var(--font-display); font-weight: 700; font-size: 1.18rem; color: #fff; }
+    .meta-metric-val.accent { color: var(--accent-red); text-shadow: 0 0 12px var(--accent-red-glow); }
+
+    .hero-quick-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .quick-stat-box { padding: 20px; border-radius: 16px; background: rgba(14,16,24,0.45); border: 1px solid rgba(255,255,255,0.06); transition: all 0.3s ease; }
+    .quick-stat-box:hover { border-color: rgba(255,51,34,0.35); background: rgba(18,21,32,0.65); transform: translateY(-2px); }
+    .stat-box-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; letter-spacing: -0.03em; color: #fff; margin-bottom: 4px; }
+    .stat-box-num .accent { color: var(--accent-red); font-size: 1.5rem; }
+    .stat-box-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; }
+
+    /* SHOWCASE SECTION */
+    .showcase-section { padding: 60px 0 120px; }
+    .showcase-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .filter-pills-wrap { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .filter-pill { background: rgba(18,20,30,0.7); border: 1px solid rgba(255,255,255,0.08); color: var(--text-muted); padding: 9px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 8px; user-select: none; }
+    .filter-pill:hover { color: #fff; border-color: rgba(255,255,255,0.22); }
+    .filter-pill.active { background: var(--accent-red); color: #fff; border-color: var(--accent-red); box-shadow: 0 4px 18px var(--accent-red-glow); }
+    .filter-count { font-size: 0.72rem; padding: 2px 7px; border-radius: 10px; background: rgba(255,255,255,0.12); font-weight: 700; }
+    .filter-pill.active .filter-count { background: rgba(0,0,0,0.25); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 32px; }
+
+    /* PROJECT CARD */
+    .project-card { position: relative; border-radius: 26px; background: var(--bg-card); border: 1px solid var(--glass-border); overflow: hidden; display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .project-card:hover { transform: translateY(-5px); border-color: var(--glass-border-hover); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px var(--accent-red-subtle); }
+    .card-preview-area { position: relative; height: 240px; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .preview-canvas-mock { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.6s ease; }
+    .project-card:hover .preview-canvas-mock { transform: scale(1.04); }
+
+    /* Browser mockup inside preview */
+    .browser-mockup { width: 88%; max-width: 440px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; background: #0c0e16; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+    .browser-toolbar { height: 28px; background: #161820; display: flex; align-items: center; padding: 0 12px; gap: 6px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .browser-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .browser-dot.red { background: #ff5f57; }
+    .browser-dot.yellow { background: #febc2e; }
+    .browser-dot.green { background: #28c840; }
+    .browser-url { margin-left: 10px; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim); }
+    .browser-content { height: 160px; display: flex; align-items: center; justify-content: center; padding: 12px; }
+    .browser-content-inner { width: 100%; height: 100%; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+
+    .card-body-area { padding: 28px 28px 24px; display: flex; flex-direction: column; flex-grow: 1; }
+    .card-category-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .card-category-tag { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-red); background: var(--accent-red-subtle); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,51,34,0.2); }
+    .card-year { font-size: 0.82rem; color: var(--text-dim); font-weight: 500; }
+    .card-project-title { font-family: var(--font-display); font-size: 1.55rem; font-weight: 700; letter-spacing: -0.02em; color: #fff; margin-bottom: 10px; line-height: 1.25; }
+    .card-project-desc { font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; }
+    .card-tech-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .tech-tag { font-size: 0.74rem; font-family: var(--font-mono); background: rgba(255,255,255,0.04); color: #b0b5cc; padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); }
+    .card-footer-row { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .btn-view-case { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: #fff; text-decoration: none; background: none; border: none; cursor: pointer; transition: all 0.25s ease; padding: 0; }
+    .btn-view-case:hover { color: var(--accent-red); transform: translateX(4px); }
+    .card-type-label { font-size: 0.78rem; color: var(--text-dim); display: flex; align-items: center; gap: 6px; }
+
+    /* SKILLS / EXPERTISE SECTION */
+    .skills-section { padding: 120px 0; }
+    .section-title { font-family: var(--font-display); font-size: clamp(2.4rem,4.5vw,3.8rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #fff; margin-bottom: 18px; }
+    .section-desc { font-size: 1.05rem; line-height: 1.65; color: var(--text-muted); max-width: 700px; }
+    .skills-header { max-width: 760px; margin-bottom: 60px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-bottom: 50px; }
+    .skill-card { padding: 36px 28px; border-radius: 22px; background: var(--bg-card); border: 1px solid var(--glass-border); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: all 0.3s ease; }
+    .skill-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent-red), transparent); opacity: 0; transition: opacity 0.3s ease; }
+    .skill-card:hover { border-color: var(--glass-border-hover); transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,0,0,0.4); }
+    .skill-card:hover::after { opacity: 1; }
+    .skill-icon { font-size: 2.2rem; margin-bottom: 16px; }
+    .skill-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .skill-desc { font-size: 0.86rem; line-height: 1.55; color: var(--text-muted); }
+
+    /* Expertise Bars */
+    .expertise-box { border-radius: 24px; padding: 40px; background: rgba(14,16,24,0.55); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(16px); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .expertise-left h3 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 14px; }
+    .expertise-left p { font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); }
+    .expertise-bars { display: flex; flex-direction: column; gap: 20px; }
+    .bar-group { display: flex; flex-direction: column; gap: 8px; }
+    .bar-label-row { display: flex; justify-content: space-between; font-size: 0.84rem; font-weight: 600; }
+    .bar-track { height: 10px; width: 100%; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #ff3322, #ff6644); box-shadow: 0 0 10px var(--accent-red-glow); transition: width 1.2s cubic-bezier(0.16,1,0.3,1); }
+
+    /* PROCESS / WORKFLOW SECTION */
+    .process-section { padding: 100px 0 140px; }
+    .process-header { max-width: 760px; margin-bottom: 60px; }
+    .process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .process-card { padding: 40px 30px; border-radius: 22px; background: var(--bg-card); border: 1px solid var(--glass-border); text-align: center; transition: all 0.3s ease; position: relative; }
+    .process-card:hover { border-color: var(--glass-border-hover); transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,0,0,0.4); }
+    .process-step-num { font-family: var(--font-display); font-size: 3.5rem; font-weight: 800; background: linear-gradient(180deg, #ff5544, #ff1100); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px; line-height: 1; }
+    .process-card-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .process-card-desc { font-size: 0.88rem; line-height: 1.6; color: var(--text-muted); }
+
+    /* CTA BANNER */
+    .projects-cta-section { padding: 60px 0 100px; }
+    .cta-glass-banner { border-radius: 28px; background: radial-gradient(circle at 10% 50%, rgba(255,51,34,0.15) 0%, transparent 60%), linear-gradient(135deg, rgba(18,20,30,0.8), rgba(12,14,22,0.9)); border: 1px solid rgba(255,51,34,0.3); padding: 60px 50px; display: flex; align-items: center; justify-content: space-between; gap: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .cta-banner-text h2 { font-family: var(--font-display); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 800; color: #fff; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .cta-banner-text p { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; line-height: 1.6; }
+
+    /* FOOTER */
+    .site-footer { padding: 100px 0 0; background: transparent; border-top: 1px solid rgba(255,255,255,0.08); overflow: hidden; }
+    .footer-main-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 70px; }
+    .footer-brand-col { max-width: 320px; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; color: #fff; text-decoration: none; display: inline-block; margin-bottom: 18px; }
+    .footer-brand-desc { font-size: 0.88rem; line-height: 1.6; color: var(--text-muted); }
+    .footer-col-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 22px; }
+    .footer-nav-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .footer-nav-list a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s ease, transform 0.2s ease; display: inline-block; }
+    .footer-nav-list a:hover { color: #fff; transform: translateX(3px); }
+    .footer-meta-row { display: flex; justify-content: space-between; align-items: center; padding: 24px 0 30px; font-size: 0.82rem; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-giant-wordmark-wrap { width: 100%; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; padding-top: 20px; user-select: none; mask-image: linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%); }
+    .footer-giant-wordmark { font-family: var(--font-display); font-size: clamp(6.5rem,18.5vw,19rem); font-weight: 800; letter-spacing: -0.04em; line-height: 0.78; text-align: center; text-transform: uppercase; background: linear-gradient(180deg, #34d399 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: -15px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hero-container { grid-template-columns: 1fr; }
+      .hero-quick-stats { grid-template-columns: repeat(2,1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2,1fr); }
+      .expertise-box { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+      .cta-glass-banner { flex-direction: column; text-align: center; }
+      .footer-main-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-pill, .tag-stack { display: none; }
+      .hero-main-title { font-size: 2.8rem; }
+      .hero-quick-stats, .skills-grid { grid-template-columns: 1fr; }
+      .footer-main-grid { grid-template-columns: 1fr; }
+      .footer-meta-row { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-mesh-glow">
+    <div class="glow-blob glow-blob-1"></div>
+    <div class="glow-blob glow-blob-2"></div>
+    <div class="glow-blob glow-blob-3"></div>
+  </div>
+
+  <div class="content-wrapper">
+
+    <!-- NAV -->
+    <header>
+      <div class="nav-container">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"></div>
+          <span>Vall.</span>
+        </a>
+        <nav class="nav-pill">
+          <a href="index.html#home" class="nav-link">Home</a>
+          <a href="index.html#about" class="nav-link">About</a>
+          <a href="index.html#services" class="nav-link">Services</a>
+          <a href="index.html#workflow" class="nav-link">Workflow</a>
+          <a href="projects.html" class="nav-link active">Projects</a>
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </nav>
+        <div class="nav-right">
+          <div class="tag-stack">
+            <span class="tag-accent">AVAILABLE</span>
+            <span>FULL-STACK</span>
+            <span>UI/UX DESIGN</span>
+            <span>FRONTEND</span>
+          </div>
+          <a href="index.html#contact" class="btn-sprint">
+            <span>Hire Me</span>
+            <span style="color: var(--accent-red)">✦</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: HERO -->
+    <section class="projects-hero" id="top">
+      <div class="container">
+        <div class="hero-container">
+          <div class="hero-title-area">
+            <div class="badge">
+              <span class="badge-dot"></span>
+              <span>✦ Selected Works & Case Studies</span>
+            </div>
+            <h1 class="hero-main-title">
+              <span class="gradient-text">CURATED</span><br>
+              <em>Digital</em> <span class="highlight-red">WORK</span>S
+            </h1>
+            <p class="hero-subtext">
+              A collection of web applications, landing pages, UI/UX designs, and full-stack projects I've crafted for startups, agencies, and brands. Each project is built with attention to detail, modern tech, and pixel-perfect design.
+            </p>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <a href="#showcase" class="btn btn-primary">
+                <span>Browse Projects</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l10-10M17 7H7M17 7v10"/></svg>
+              </a>
+              <a href="index.html#contact" class="btn btn-outline">Start a Project</a>
+            </div>
+          </div>
+
+          <div class="hero-meta-summary">
+            <div class="meta-metric-row">
+              <span class="meta-metric-label"><span style="color: var(--accent-red);">●</span> Total Projects</span>
+              <span class="meta-metric-val">30+ Delivered</span>
+            </div>
+            <div class="meta-metric-row">
+              <span class="meta-metric-label"><span style="color: #34d399;">●</span> Client Satisfaction</span>
+              <span class="meta-metric-val">98% Rate</span>
+            </div>
+            <div class="meta-metric-row">
+              <span class="meta-metric-label"><span style="color: #00e5ff;">●</span> Avg Delivery</span>
+              <span class="meta-metric-val accent">2-4 Weeks</span>
+            </div>
+            <div class="meta-metric-row">
+              <span class="meta-metric-label"><span style="color: #f59e0b;">●</span> Stack Focus</span>
+              <span class="meta-metric-val">React / Next.js</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-quick-stats">
+          <div class="quick-stat-box">
+            <div class="stat-box-num">30<span class="accent">+</span></div>
+            <div class="stat-box-desc">Web projects shipped to production</div>
+          </div>
+          <div class="quick-stat-box">
+            <div class="stat-box-num">15<span class="accent">+</span></div>
+            <div class="stat-box-desc">Happy clients from startups to enterprises</div>
+          </div>
+          <div class="quick-stat-box">
+            <div class="stat-box-num">98<span class="accent">%</span></div>
+            <div class="stat-box-desc">Client satisfaction & repeat project rate</div>
+          </div>
+          <div class="quick-stat-box">
+            <div class="stat-box-num">3<span class="accent">+</span></div>
+            <div class="stat-box-desc">Years crafting modern digital experiences</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PROJECT SHOWCASE -->
+    <section class="showcase-section" id="showcase">
+      <div class="container">
+        <div class="showcase-toolbar">
+          <div class="filter-pills-wrap" id="filterPills">
+            <button class="filter-pill active" data-filter="all"><span>All Projects</span><span class="filter-count">8</span></button>
+            <button class="filter-pill" data-filter="fullstack"><span>Full-Stack Apps</span><span class="filter-count">3</span></button>
+            <button class="filter-pill" data-filter="landing"><span>Landing Pages</span><span class="filter-count">2</span></button>
+            <button class="filter-pill" data-filter="uiux"><span>UI/UX Design</span><span class="filter-count">2</span></button>
+            <button class="filter-pill" data-filter="dashboard"><span>Dashboards</span><span class="filter-count">1</span></button>
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-dim);">
+            Showing <span id="projectCount" style="color: #fff; font-weight: 700;">8</span> projects
+          </div>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+
+          <!-- 1: SaaS Dashboard -->
+          <article class="project-card" data-category="fullstack">
+            <div class="card-preview-area">
+              <div class="preview-canvas-mock" style="background: radial-gradient(circle at center, #111827 0%, #080a14 100%);">
+                <div class="browser-mockup">
+                  <div class="browser-toolbar">
+                    <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+                    <span class="browser-url">app.fintrack.io/dashboard</span>
+                  </div>
+                  <div class="browser-content">
+                    <div class="browser-content-inner" style="background: linear-gradient(135deg, #0f172a, #1e293b); padding: 12px;">
+                      <div style="display: flex; gap: 8px; width: 100%; margin-bottom: 8px;">
+                        <div style="flex: 1; height: 40px; border-radius: 6px; background: rgba(255,51,34,0.15); border: 1px solid rgba(255,51,34,0.25);"></div>
+                        <div style="flex: 1; height: 40px; border-radius: 6px; background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.25);"></div>
+                        <div style="flex: 1; height: 40px; border-radius: 6px; background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.25);"></div>
+                      </div>
+                      <div style="width: 100%; height: 60px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: flex-end; padding: 6px 8px; gap: 3px;">
+                        <div style="width: 12%; height: 30%; background: #ff3322; border-radius: 2px;"></div>
+                        <div style="width: 12%; height: 55%; background: #ff3322; border-radius: 2px;"></div>
+                        <div style="width: 12%; height: 70%; background: #ff3322; border-radius: 2px;"></div>
+                        <div style="width: 12%; height: 45%; background: #ff3322; border-radius: 2px;"></div>
+                        <div style="width: 12%; height: 85%; background: #ff3322; border-radius: 2px;"></div>
+                        <div style="width: 12%; height: 60%; background: #ff3322; border-radius: 2px;"></div>
+                        <div style="width: 12%; height: 90%; background: #ff3322; border-radius: 2px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-area">
+              <div class="card-category-row"><span class="card-category-tag">Full-Stack App</span><span class="card-year">2026</span></div>
+              <h2 class="card-project-title">FinTrack — Personal Finance Dashboard</h2>
+              <p class="card-project-desc">Full-stack SaaS dashboard with real-time charts, budget tracking, expense categorization, and multi-currency support. Complete with auth, Stripe integration, and responsive dark UI.</p>
+              <div class="card-tech-row">
+                <span class="tech-tag">Next.js 14</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Prisma</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Stripe</span>
+              </div>
+              <div class="card-footer-row">
+                <button class="btn-view-case"><span>View Details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
+                <div class="card-type-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>4 Weeks</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2: Agency Landing Page -->
+          <article class="project-card" data-category="landing">
+            <div class="card-preview-area">
+              <div class="preview-canvas-mock" style="background: radial-gradient(circle at center, #1a1025 0%, #0a080f 100%);">
+                <div class="browser-mockup">
+                  <div class="browser-toolbar">
+                    <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+                    <span class="browser-url">www.novaagency.co</span>
+                  </div>
+                  <div class="browser-content">
+                    <div class="browser-content-inner" style="background: linear-gradient(135deg, #1a0533, #0d0521); padding: 16px; align-items: flex-start;">
+                      <div style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.15;">NOVA<br><span style="color: #a855f7;">AGENCY</span></div>
+                      <div style="width: 80%; height: 2px; background: linear-gradient(90deg, #a855f7, transparent); margin-top: 8px;"></div>
+                      <div style="display: flex; gap: 6px; margin-top: auto; width: 100%;">
+                        <div style="flex: 1; height: 28px; border-radius: 14px; background: #a855f7; display: flex; align-items: center; justify-content: center; font-size: 0.55rem; color: #fff; font-weight: 700;">GET STARTED</div>
+                        <div style="flex: 1; height: 28px; border-radius: 14px; border: 1px solid rgba(168,85,247,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.55rem; color: #a855f7; font-weight: 600;">LEARN MORE</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-area">
+              <div class="card-category-row"><span class="card-category-tag">Landing Page</span><span class="card-year">2026</span></div>
+              <h2 class="card-project-title">Nova — Creative Agency Landing</h2>
+              <p class="card-project-desc">Premium dark-themed landing page for a creative agency with scroll animations, glassmorphism components, and smooth micro-interactions that convert visitors into leads.</p>
+              <div class="card-tech-row">
+                <span class="tech-tag">HTML/CSS/JS</span><span class="tech-tag">GSAP</span><span class="tech-tag">Figma</span><span class="tech-tag">Scroll Animations</span>
+              </div>
+              <div class="card-footer-row">
+                <button class="btn-view-case"><span>View Details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
+                <div class="card-type-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>1 Week</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3: E-Commerce Platform -->
+          <article class="project-card" data-category="fullstack">
+            <div class="card-preview-area">
+              <div class="preview-canvas-mock" style="background: radial-gradient(circle at center, #14201d 0%, #070e0c 100%);">
+                <div class="browser-mockup">
+                  <div class="browser-toolbar">
+                    <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+                    <span class="browser-url">shop.urbanthread.id</span>
+                  </div>
+                  <div class="browser-content">
+                    <div class="browser-content-inner" style="background: #0f1714; padding: 12px;">
+                      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; width: 100%; height: 100%;">
+                        <div style="background: #1a2e25; border-radius: 6px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 1.5rem;">👕</span></div>
+                        <div style="background: #1a2e25; border-radius: 6px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 1.5rem;">👟</span></div>
+                        <div style="background: #1a2e25; border-radius: 6px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 1.5rem;">🎒</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-area">
+              <div class="card-category-row"><span class="card-category-tag">Full-Stack App</span><span class="card-year">2025</span></div>
+              <h2 class="card-project-title">UrbanThread — E-Commerce Platform</h2>
+              <p class="card-project-desc">Modern e-commerce platform with product filtering, cart management, checkout flow, payment gateway integration, and admin CMS for product management.</p>
+              <div class="card-tech-row">
+                <span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Midtrans</span><span class="tech-tag">TailwindCSS</span>
+              </div>
+              <div class="card-footer-row">
+                <button class="btn-view-case"><span>View Details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
+                <div class="card-type-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>3 Weeks</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4: UI/UX Mobile App Design -->
+          <article class="project-card" data-category="uiux">
+            <div class="card-preview-area">
+              <div class="preview-canvas-mock" style="background: radial-gradient(circle at center, #1c1520 0%, #090710 100%);">
+                <div style="display: flex; gap: 16px; align-items: center;">
+                  <div style="width: 80px; height: 150px; border-radius: 16px; background: linear-gradient(180deg, #1e1b4b, #312e81); border: 2px solid rgba(139,92,246,0.4); display: flex; flex-direction: column; padding: 8px 6px; gap: 4px;">
+                    <div style="width: 100%; height: 8px; border-radius: 4px; background: rgba(139,92,246,0.3);"></div>
+                    <div style="width: 100%; flex: 1; border-radius: 8px; background: rgba(139,92,246,0.15); margin-top: 4px;"></div>
+                    <div style="width: 100%; height: 16px; border-radius: 8px; background: #8b5cf6; margin-top: auto;"></div>
+                  </div>
+                  <div style="width: 80px; height: 150px; border-radius: 16px; background: linear-gradient(180deg, #1e1b4b, #312e81); border: 2px solid rgba(139,92,246,0.4); display: flex; flex-direction: column; padding: 8px 6px; gap: 4px;">
+                    <div style="width: 60%; height: 8px; border-radius: 4px; background: rgba(139,92,246,0.4);"></div>
+                    <div style="display: flex; gap: 4px; margin-top: 4px;">
+                      <div style="flex: 1; height: 32px; border-radius: 6px; background: rgba(139,92,246,0.2);"></div>
+                      <div style="flex: 1; height: 32px; border-radius: 6px; background: rgba(139,92,246,0.2);"></div>
+                    </div>
+                    <div style="width: 100%; flex: 1; border-radius: 8px; background: rgba(255,255,255,0.04); margin-top: 4px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-area">
+              <div class="card-category-row"><span class="card-category-tag">UI/UX Design</span><span class="card-year">2026</span></div>
+              <h2 class="card-project-title">MindFlow — Meditation App UI</h2>
+              <p class="card-project-desc">Complete mobile app UI kit designed in Figma with 40+ screens, dark/light mode, custom illustration system, and interactive prototype for user testing.</p>
+              <div class="card-tech-row">
+                <span class="tech-tag">Figma</span><span class="tech-tag">Prototyping</span><span class="tech-tag">Design System</span><span class="tech-tag">iOS + Android</span>
+              </div>
+              <div class="card-footer-row">
+                <button class="btn-view-case"><span>View Details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
+                <div class="card-type-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>2 Weeks</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5: Analytics Dashboard -->
+          <article class="project-card" data-category="dashboard">
+            <div class="card-preview-area">
+              <div class="preview-canvas-mock" style="background: radial-gradient(circle at center, #0f1728 0%, #060810 100%);">
+                <div class="browser-mockup">
+                  <div class="browser-toolbar">
+                    <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+                    <span class="browser-url">analytics.pulsedata.co</span>
+                  </div>
+                  <div class="browser-content">
+                    <div class="browser-content-inner" style="background: #0a101f; padding: 10px;">
+                      <div style="display: flex; gap: 6px; width: 100%; margin-bottom: 6px;">
+                        <div style="flex: 1; height: 20px; border-radius: 4px; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2); display: flex; align-items: center; justify-content: center;"><span style="font-size: 0.5rem; color: #00e5ff; font-family: var(--font-mono);">12.4k</span></div>
+                        <div style="flex: 1; height: 20px; border-radius: 4px; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.2); display: flex; align-items: center; justify-content: center;"><span style="font-size: 0.5rem; color: #34d399; font-family: var(--font-mono);">+28%</span></div>
+                      </div>
+                      <div style="width: 100%; flex: 1; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                        <svg width="100%" height="100%" viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M 0 50 Q 30 30 60 45 T 120 20 T 200 10" fill="none" stroke="#00e5ff" stroke-width="2"/><path d="M 0 50 Q 30 30 60 45 T 120 20 T 200 10 V 60 H 0 Z" fill="url(#areaFill)" opacity="0.15"/><defs><linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-area">
+              <div class="card-category-row"><span class="card-category-tag">Dashboard</span><span class="card-year">2025</span></div>
+              <h2 class="card-project-title">PulseData — Real-time Analytics Dashboard</h2>
+              <p class="card-project-desc">Interactive analytics dashboard with real-time data visualization, filterable charts, date range selectors, and exportable reports built for a SaaS startup.</p>
+              <div class="card-tech-row">
+                <span class="tech-tag">React</span><span class="tech-tag">D3.js</span><span class="tech-tag">WebSocket</span><span class="tech-tag">Express</span><span class="tech-tag">Chart.js</span>
+              </div>
+              <div class="card-footer-row">
+                <button class="btn-view-case"><span>View Details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
+                <div class="card-type-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>3 Weeks</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6: SaaS Landing -->
+          <article class="project-card" data-category="landing">
+            <div class="card-preview-area">
+              <div class="preview-canvas-mock" style="background: radial-gradient(circle at center, #1a1610 0%, #0c0a08 100%);">
+                <div class="browser-mockup">
+                  <div class="browser-toolbar">
+                    <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+                    <span class="browser-url">www.shipfast.dev</span>
+                  </div>
+                  <div class="browser-content">
+                    <div class="browser-content-inner" style="background: linear-gradient(180deg, #1c1510, #0f0b08); padding: 14px; align-items: center; justify-content: center;">
+                      <div style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: #fff; text-align: center; letter-spacing: -0.02em;">Ship <span style="color: #f59e0b;">10x</span> Faster</div>
+                      <div style="font-size: 0.5rem; color: var(--text-dim); text-align: center; margin-top: 4px;">The developer toolkit for modern SaaS</div>
+                      <div style="width: 60%; height: 22px; border-radius: 12px; background: linear-gradient(90deg, #f59e0b, #d97706); margin-top: 10px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 0.5rem; font-weight: 700; color: #000;">GET STARTED FREE</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-area">
+              <div class="card-category-row"><span class="card-category-tag">Landing Page</span><span class="card-year">2025</span></div>
+              <h2 class="card-project-title">ShipFast — SaaS Product Landing</h2>
+              <p class="card-project-desc">High-converting SaaS landing page with pricing tables, feature showcases, testimonial carousels, and integrated waitlist form. Optimized for SEO and performance.</p>
+              <div class="card-tech-row">
+                <span class="tech-tag">Next.js</span><span class="tech-tag">TailwindCSS</span><span class="tech-tag">Framer Motion</span><span class="tech-tag">Vercel</span>
+              </div>
+              <div class="card-footer-row">
+                <button class="btn-view-case"><span>View Details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
+                <div class="card-type-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>1 Week</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7: UI/UX Design System -->
+          <article class="project-card" data-category="uiux">
+            <div class="card-preview-area">
+              <div class="preview-canvas-mock" style="background: radial-gradient(circle at center, #161824 0%, #080910 100%);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 24px;">
+                  <div style="height: 60px; border-radius: 10px; background: rgba(255,51,34,0.12); border: 1px solid rgba(255,51,34,0.25); display: flex; align-items: center; justify-content: center;"><div style="width: 70%; height: 10px; border-radius: 5px; background: #ff3322;"></div></div>
+                  <div style="height: 60px; border-radius: 10px; background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.25); display: flex; align-items: center; justify-content: center;"><div style="width: 50%; height: 10px; border-radius: 5px; background: #34d399;"></div></div>
+                  <div style="height: 60px; border-radius: 10px; background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.25); display: flex; align-items: center; justify-content: center;"><div style="width: 60%; height: 10px; border-radius: 5px; background: #60a5fa;"></div></div>
+                  <div style="height: 60px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;"><div style="width: 40%; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.3);"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-area">
+              <div class="card-category-row"><span class="card-category-tag">UI/UX Design</span><span class="card-year">2025</span></div>
+              <h2 class="card-project-title">Spectrum — Design System & Component Library</h2>
+              <p class="card-project-desc">Comprehensive design system with 120+ reusable components, color tokens, typography scale, spacing system, and interactive Figma component library.</p>
+              <div class="card-tech-row">
+                <span class="tech-tag">Figma</span><span class="tech-tag">Storybook</span><span class="tech-tag">CSS Variables</span><span class="tech-tag">Design Tokens</span>
+              </div>
+              <div class="card-footer-row">
+                <button class="btn-view-case"><span>View Details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
+                <div class="card-type-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>2 Weeks</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8: Portfolio Website -->
+          <article class="project-card" data-category="fullstack">
+            <div class="card-preview-area">
+              <div class="preview-canvas-mock" style="background: radial-gradient(circle at center, #1a0d0d 0%, #0a0608 100%);">
+                <div class="browser-mockup">
+                  <div class="browser-toolbar">
+                    <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+                    <span class="browser-url">rava.dev</span>
+                  </div>
+                  <div class="browser-content">
+                    <div class="browser-content-inner" style="background: #0a0608; padding: 14px; align-items: flex-start;">
+                      <div style="font-family: var(--font-display); font-size: 0.9rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;">I Build Digital<br><span style="color: var(--accent-red);">Experience</span></div>
+                      <div style="width: 100%; height: 40px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); margin-top: auto;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-area">
+              <div class="card-category-row"><span class="card-category-tag">Full-Stack App</span><span class="card-year">2026</span></div>
+              <h2 class="card-project-title">This Portfolio — Scroll Animation Showcase</h2>
+              <p class="card-project-desc">The very website you're looking at! Built with vanilla HTML/CSS/JS featuring 300-frame scroll-scrubbed canvas animations, glassmorphism UI, and premium dark design.</p>
+              <div class="card-tech-row">
+                <span class="tech-tag">HTML/CSS/JS</span><span class="tech-tag">Canvas API</span><span class="tech-tag">Node.js</span><span class="tech-tag">Glassmorphism</span>
+              </div>
+              <div class="card-footer-row">
+                <button class="btn-view-case"><span>View Details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
+                <div class="card-type-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Ongoing</span></div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SKILLS & EXPERTISE -->
+    <section class="skills-section" id="skills">
+      <div class="container">
+        <div class="skills-header">
+          <div class="badge"><span class="badge-dot"></span><span>✦ Skills & Expertise</span></div>
+          <h2 class="section-title">Tech Stack & Design Tools I Master</h2>
+          <p class="section-desc">From pixel-perfect UI design in Figma to production-grade full-stack applications — here's the toolkit I use to bring ideas to life.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon">⚛️</div>
+            <h3 class="skill-name">Frontend Development</h3>
+            <p class="skill-desc">React, Next.js, Vue.js, TypeScript, TailwindCSS, GSAP animations, and responsive design.</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🔧</div>
+            <h3 class="skill-name">Backend &amp; Databases</h3>
+            <p class="skill-desc">Node.js, Laravel (PHP), REST APIs, PostgreSQL, MySQL, Prisma ORM, and scalable database design.</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🎨</div>
+            <h3 class="skill-name">UI/UX Design</h3>
+            <p class="skill-desc">Figma, design systems, wireframing, prototyping, user flows, and design token architecture.</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🚀</div>
+            <h3 class="skill-name">DevOps &amp; Deployment</h3>
+            <p class="skill-desc">Docker, Vercel, Netlify, CI/CD pipelines, GitHub Actions, and cloud infrastructure.</p>
+          </div>
+        </div>
+
+        <div class="expertise-box">
+          <div class="expertise-left">
+            <div class="badge" style="margin-bottom: 16px;"><span class="badge-dot"></span><span>Proficiency</span></div>
+            <h3>Built for Real-World Production</h3>
+            <p>Every project is engineered for performance, accessibility, and scalability — not just looks. Here's my proficiency breakdown across core disciplines.</p>
+          </div>
+          <div class="expertise-right">
+            <div class="expertise-bars">
+              <div class="bar-group">
+                <div class="bar-label-row"><span style="color:#fff;">React / Next.js / TypeScript</span><span style="color:var(--accent-red); font-family:var(--font-mono);">95%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
+              </div>
+              <div class="bar-group">
+                <div class="bar-label-row"><span style="color:#fff;">Backend (Node.js &amp; Laravel)</span><span style="color:var(--accent-red); font-family:var(--font-mono);">90%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+              </div>
+              <div class="bar-group">
+                <div class="bar-label-row"><span style="color:#fff;">Databases (PostgreSQL &amp; MySQL)</span><span style="color:var(--accent-red); font-family:var(--font-mono);">88%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+              </div>
+              <div class="bar-group">
+                <div class="bar-label-row"><span style="color:#fff;">UI/UX Design (Figma &amp; Tailwind)</span><span style="color:var(--accent-red); font-family:var(--font-mono);">92%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width: 92%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MY PROCESS -->
+    <section class="process-section" id="process">
+      <div class="container">
+        <div class="process-header">
+          <div class="badge"><span class="badge-dot"></span><span>✦ How I Work</span></div>
+          <h2 class="section-title">From Idea to Launch in 3 Steps</h2>
+          <p class="section-desc">I follow a structured design-first development workflow that ensures every project is delivered on time with exceptional quality.</p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-card">
+            <div class="process-step-num">01</div>
+            <h3 class="process-card-title">Discovery & Design</h3>
+            <p class="process-card-desc">Understanding your goals, researching the market, wireframing, and creating high-fidelity designs in Figma with interactive prototypes.</p>
+          </div>
+          <div class="process-card">
+            <div class="process-step-num">02</div>
+            <h3 class="process-card-title">Development & Build</h3>
+            <p class="process-card-desc">Pixel-perfect implementation using modern frameworks. Responsive, performant, and accessible code with clean architecture.</p>
+          </div>
+          <div class="process-card">
+            <div class="process-step-num">03</div>
+            <h3 class="process-card-title">Launch & Iterate</h3>
+            <p class="process-card-desc">Deployment to production, performance optimization, SEO setup, and ongoing support with iterative improvements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="projects-cta-section">
+      <div class="container">
+        <div class="cta-glass-banner">
+          <div class="cta-banner-text">
+            <h2>Have a Project in Mind?</h2>
+            <p>Let's collaborate and build something amazing together. I'm currently available for freelance projects and full-time opportunities.</p>
+          </div>
+          <div style="display: flex; gap: 14px; flex-shrink: 0;">
+            <a href="index.html#contact" class="btn btn-primary">
+              <span>Let's Talk</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l10-10M17 7H7M17 7v10"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main-grid">
+          <div class="footer-brand-col">
+            <a href="index.html" class="footer-logo">VALL.</a>
+            <p class="footer-brand-desc">Rava — full-stack web developer & UI/UX designer creating modern digital experiences.</p>
+          </div>
+          <div>
+            <h4 class="footer-col-title">Quick link</h4>
+            <ul class="footer-nav-list">
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+              <li><a href="index.html#services">Services</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-col-title">Portfolio</h4>
+            <ul class="footer-nav-list">
+              <li><a href="projects.html">All Projects</a></li>
+              <li><a href="index.html#services">Services</a></li>
+              <li><a href="index.html#workflow">Workflow</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-col-title">Connect</h4>
+            <ul class="footer-nav-list">
+              <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+              <li><a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-col-title">Others</h4>
+            <ul class="footer-nav-list">
+              <li><a href="index.html#workflow">Blog</a></li>
+              <li><a href="index.html#contact">Hire Me</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta-row">
+          <div>©2026 Rava. All rights reserved.</div>
+          <div>Designed & Built by Vall</div>
+        </div>
+        <div class="footer-giant-wordmark-wrap">
+          <div class="footer-giant-wordmark">VALL.</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Filter Functionality
+    const filterBtns = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.project-card');
+    const countEl = document.getElementById('projectCount');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        let count = 0;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+            count++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        if (countEl) countEl.textContent = count;
+      });
+    });
+  </script>
+</body>
+</html>
